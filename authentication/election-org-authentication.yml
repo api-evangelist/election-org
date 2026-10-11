@@ -1,0 +1,16 @@
+generated: '2026-10-11'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://election.org/data/api/access
+sources:
+- https://election.org/data/api/access
+description: Authentication for Election.org Public Data API
+schemes:
+- type: http-bearer
+  name: Bearer
+  evidence: 'fetch("https://election.org/api/developers/data/committees?q=buckeye", { headers: { Authorization: "Bearer " + process.env.ELECTION_API_KEY
+    }})'
+  location: header
+  header: Authorization
+  how_to_obtain: Free API key via registration form
+docs: https://election.org/data/api/access

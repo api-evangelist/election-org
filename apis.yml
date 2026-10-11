@@ -1,29 +1,98 @@
 aid: election-org
 name: Election.org Public Data API
-description: 'Election.org Public Data API is a company surfaced via the API Evangelist harvest backlog
-  (source: new-submission) and added to the network as a stub for full-pipeline profiling.'
+image: https://election.org/og.png
+description: Election.org Public Data API provides free, anonymous access to a wide range of civic election data, including linked civic JSON
+  datasets and federal CSV files. Users can retrieve information on candidates, results, campaign finance, and more, supporting public insight
+  and research without requiring authentication or payment.
 url: https://raw.githubusercontent.com/api-evangelist/election-org/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:new-submission
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-11 (modular-v1; was harvest)
 specificationVersion: '0.20'
 created: '2026-10-11'
 modified: '2026-10-11'
 tags:
-- Company
-apis: []
+- Elections
+- Public Records
+- Data API
+- Campaign Finance
+- Government
+- Political Data
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Spectral
+  url: rules/election-org-rules.yml
+- type: JSONLD
+  url: json-ld/election-org-context.jsonld
+- type: Vocabulary
+  url: vocabulary/election-org-vocabulary.yml
+- type: Conformance
+  url: conformance/election-org-conformance.yml
+- type: DataModel
+  url: data-model/election-org-data-model.yml
+- type: Authentication
+  url: authentication/election-org-authentication.yml
+- type: ErrorCatalog
+  url: errors/election-org-problem-types.yml
+- type: Hosts
+  url: hosts/election-org-hosts.yml
+- type: Vendors
+  url: vendors/election-org-vendors.yml
+- type: ChangeLog
+  url: https://election.org/changelog
+- type: DomainSecurity
+  url: security/election-org-domain-security.yml
 - type: Website
   url: https://election.org/
 - type: Documentation
   url: https://election.org/data/api
-x-submission-notes: Source-linked civic/election JSON + federal CSV datasets, anonymous + free keys; requests
-  free listing only
+- type: PrivacyPolicy
+  url: https://election.org/privacy
+- type: Support
+  url: https://election.org/support
+apis:
+- name: Election.org Public Data API
+  description: Public API providing free access to civic election data.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  aid: election-org:election-org-public-data-api
+- aid: election-org:election-org-public-data-api-openapi-api
+  name: Election.org Public Data API Openapi API
+  description: 'Source-first public election data. Public beta coverage is explicit; null and omitted values are never silently converted to zeroes
+
+    or inferred facts.'
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/election-org-openapi-openapi.json
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+x-submission-notes: Source-linked civic/election JSON + federal CSV datasets, anonymous + free keys; requests free listing only
 x-submission-probe: root 200, docs 200, OpenAPI 3.1.0 200 (56 ops), invented path 404
 x-submitted-by: hello@election.org (sender jacksonjezio@gmail.com) (email, 2026-10-11)
+x-coverage:
+  state: unreadable
+  reason: no-machine-readable-spec
+  method: derived
+  generated: '2026-10-11'
+  generator: derive-coverage.py (pre-flight evidence)
+  detail: the company publishes developer documentation but serves no machine-readable contract from it
+  evidence:
+  - url: https://election.org/api/mcp
+    status: null
+  - url: https://election.org/
+    status: 200
+x-enrichment:
+  date: '2026-10-11'
+  status: enriched
+  artifacts_added: 11
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

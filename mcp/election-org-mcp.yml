@@ -1,0 +1,7 @@
+generated: '2026-10-11'
+method: derived
+source: openapi/election-org-openapi.yml
+type: MCPServer
+deployment:
+  mode: none
+  verified: derived
