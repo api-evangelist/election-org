@@ -61,16 +61,726 @@ apis:
   humanURL: https://election.org/data/api
   baseURL: https://election.org/api/v1
   aid: election-org:election-org-public-data-api
-- aid: election-org:election-org-public-data-api-openapi-api
-  name: Election.org Public Data API Openapi API
-  description: 'Source-first public election data. Public beta coverage is explicit; null and omitted values are never silently converted to zeroes
-
-    or inferred facts.'
+- aid: election-org:election-org-address-api
+  name: Election.org Public Data API Address API
+  description: The Address API from Election.org Public Data API — 1 operation(s) for address.
   humanURL: https://election.org/data/api
   baseURL: https://election.org/api/v1
+  tags:
+  - Address
   properties:
   - type: OpenAPI
-    url: openapi/_original/election-org-openapi-openapi.json
+    url: openapi/election-org-address-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-alerts-api
+  name: Election.org Public Data API Alerts API
+  description: The Alerts API from Election.org Public Data API — 1 operation(s) for alerts.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-alerts-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-authority-topics-api
+  name: Election.org Public Data API Authority Topics API
+  description: >-
+    The Authority Topics API from Election.org Public Data API — 1 operation(s) for authority topics.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Authority Topics
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-authority-topics-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-ballot-measures-api
+  name: Election.org Public Data API Ballot Measures API
+  description: >-
+    The Ballot Measures API from Election.org Public Data API — 1 operation(s) for ballot measures.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Ballot Measures
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-ballot-measures-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-ballots-api
+  name: Election.org Public Data API Ballots API
+  description: The Ballots API from Election.org Public Data API — 1 operation(s) for ballots.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Ballots
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-ballots-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-candidacy-opportunities-api
+  name: Election.org Public Data API Candidacy Opportunities API
+  description: >-
+    The Candidacy Opportunities API from Election.org Public Data API — 1 operation(s) for candidacy opportunities.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Candidacy Opportunities
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-candidacy-opportunities-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-candidate-compare-api
+  name: Election.org Public Data API Candidate Compare API
+  description: >-
+    The Candidate Compare API from Election.org Public Data API — 1 operation(s) for candidate compare.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Candidate Compare
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-candidate-compare-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-candidate-filings-api
+  name: Election.org Public Data API Candidate Filings API
+  description: >-
+    The Candidate Filings API from Election.org Public Data API — 1 operation(s) for candidate filings.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Candidate Filings
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-candidate-filings-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-candidate-profiles-api
+  name: Election.org Public Data API Candidate Profiles API
+  description: >-
+    The Candidate Profiles API from Election.org Public Data API — 1 operation(s) for candidate profiles.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Candidate Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-candidate-profiles-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-candidates-api
+  name: Election.org Public Data API Candidates API
+  description: The Candidates API from Election.org Public Data API — 1 operation(s) for candidates.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Candidates
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-candidates-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-charts-api
+  name: Election.org Public Data API Charts API
+  description: The Charts API from Election.org Public Data API — 1 operation(s) for charts.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Charts
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-charts-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-civic-systems-api
+  name: Election.org Public Data API Civic Systems API
+  description: >-
+    The Civic Systems API from Election.org Public Data API — 1 operation(s) for civic systems.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Civic Systems
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-civic-systems-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-committees-api
+  name: Election.org Public Data API Committees API
+  description: The Committees API from Election.org Public Data API — 1 operation(s) for committees.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Committees
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-committees-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-contests-api
+  name: Election.org Public Data API Contests API
+  description: The Contests API from Election.org Public Data API — 1 operation(s) for contests.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Contests
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-contests-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-countries-api
+  name: Election.org Public Data API Countries API
+  description: The Countries API from Election.org Public Data API — 1 operation(s) for countries.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Countries
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-countries-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-datasets-api
+  name: Election.org Public Data API Datasets API
+  description: The Datasets API from Election.org Public Data API — 1 operation(s) for datasets.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-datasets-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-districts-api
+  name: Election.org Public Data API Districts API
+  description: The Districts API from Election.org Public Data API — 1 operation(s) for districts.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Districts
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-districts-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-downloads-api
+  name: Election.org Public Data API Downloads API
+  description: The Downloads API from Election.org Public Data API — 7 operation(s) for downloads.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Downloads
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-downloads-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-election-administration-api
+  name: Election.org Public Data API Election Administration API
+  description: >-
+    The Election Administration API from Election.org Public Data API — 1 operation(s) for election administration.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Election Administration
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-election-administration-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-election-org-public-data-api-api
+  name: Election.org Public Data API Election.org Public Data API
+  description: >-
+    The Election.org Public Data API API from Election.org Public Data API — 1 operation(s) for election.org
+    public data api.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Election.org Public Data API
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-election-org-public-data-api-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-election-rules-api
+  name: Election.org Public Data API Election Rules API
+  description: >-
+    The Election Rules API from Election.org Public Data API — 1 operation(s) for election rules.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Election Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-election-rules-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-elections-api
+  name: Election.org Public Data API Elections API
+  description: The Elections API from Election.org Public Data API — 2 operation(s) for elections.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Elections
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-elections-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-finance-api
+  name: Election.org Public Data API Finance API
+  description: The Finance API from Election.org Public Data API — 1 operation(s) for finance.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Finance
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-finance-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-financial-disclosures-api
+  name: Election.org Public Data API Financial Disclosures API
+  description: >-
+    The Financial Disclosures API from Election.org Public Data API — 1 operation(s) for financial disclosures.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Financial Disclosures
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-financial-disclosures-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-governments-api
+  name: Election.org Public Data API Governments API
+  description: The Governments API from Election.org Public Data API — 1 operation(s) for governments.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Governments
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-governments-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-international-results-api
+  name: Election.org Public Data API International Results API
+  description: >-
+    The International Results API from Election.org Public Data API — 1 operation(s) for international
+    results.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - International Results
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-international-results-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-judges-api
+  name: Election.org Public Data API Judges API
+  description: The Judges API from Election.org Public Data API — 1 operation(s) for judges.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Judges
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-judges-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-judicial-officials-api
+  name: Election.org Public Data API Judicial Officials API
+  description: >-
+    The Judicial Officials API from Election.org Public Data API — 1 operation(s) for judicial officials.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Judicial Officials
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-judicial-officials-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-local-adapters-api
+  name: Election.org Public Data API Local Adapters API
+  description: >-
+    The Local Adapters API from Election.org Public Data API — 1 operation(s) for local adapters.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Local Adapters
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-local-adapters-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-local-candidate-backgrounds-api
+  name: Election.org Public Data API Local Candidate Backgrounds API
+  description: >-
+    The Local Candidate Backgrounds API from Election.org Public Data API — 1 operation(s) for local candidate
+    backgrounds.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Local Candidate Backgrounds
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-local-candidate-backgrounds-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-local-candidate-endorsements-api
+  name: Election.org Public Data API Local Candidate Endorsements API
+  description: >-
+    The Local Candidate Endorsements API from Election.org Public Data API — 1 operation(s) for local
+    candidate endorsements.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Local Candidate Endorsements
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-local-candidate-endorsements-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-local-candidate-media-api
+  name: Election.org Public Data API Local Candidate Media API
+  description: >-
+    The Local Candidate Media API from Election.org Public Data API — 1 operation(s) for local candidate
+    media.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Local Candidate Media
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-local-candidate-media-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-local-candidate-positions-api
+  name: Election.org Public Data API Local Candidate Positions API
+  description: >-
+    The Local Candidate Positions API from Election.org Public Data API — 1 operation(s) for local candidate
+    positions.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Local Candidate Positions
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-local-candidate-positions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-local-candidates-api
+  name: Election.org Public Data API Local Candidates API
+  description: >-
+    The Local Candidates API from Election.org Public Data API — 1 operation(s) for local candidates.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Local Candidates
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-local-candidates-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-local-coverage-api
+  name: Election.org Public Data API Local Coverage API
+  description: >-
+    The Local Coverage API from Election.org Public Data API — 1 operation(s) for local coverage.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Local Coverage
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-local-coverage-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-local-position-history-api
+  name: Election.org Public Data API Local Position History API
+  description: >-
+    The Local Position History API from Election.org Public Data API — 1 operation(s) for local position
+    history.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Local Position History
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-local-position-history-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-local-promises-api
+  name: Election.org Public Data API Local Promises API
+  description: >-
+    The Local Promises API from Election.org Public Data API — 1 operation(s) for local promises.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Local Promises
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-local-promises-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-office-guides-api
+  name: Election.org Public Data API Office Guides API
+  description: >-
+    The Office Guides API from Election.org Public Data API — 1 operation(s) for office guides.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Office Guides
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-office-guides-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-offices-api
+  name: Election.org Public Data API Offices API
+  description: The Offices API from Election.org Public Data API — 1 operation(s) for offices.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Offices
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-offices-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-people-api
+  name: Election.org Public Data API People API
+  description: The People API from Election.org Public Data API — 1 operation(s) for people.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - People
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-people-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-political-ads-api
+  name: Election.org Public Data API Political Ads API
+  description: >-
+    The Political Ads API from Election.org Public Data API — 1 operation(s) for political ads.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Political Ads
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-political-ads-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-presidential-results-api
+  name: Election.org Public Data API Presidential Results API
+  description: >-
+    The Presidential Results API from Election.org Public Data API — 1 operation(s) for presidential results.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Presidential Results
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-presidential-results-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-questionnaires-api
+  name: Election.org Public Data API Questionnaires API
+  description: >-
+    The Questionnaires API from Election.org Public Data API — 1 operation(s) for questionnaires.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Questionnaires
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-questionnaires-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-representatives-api
+  name: Election.org Public Data API Representatives API
+  description: >-
+    The Representatives API from Election.org Public Data API — 1 operation(s) for representatives.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Representatives
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-representatives-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-results-api
+  name: Election.org Public Data API Results API
+  description: The Results API from Election.org Public Data API — 1 operation(s) for results.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Results
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-results-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-school-finance-comparisons-api
+  name: Election.org Public Data API School Finance Comparisons API
+  description: >-
+    The School Finance Comparisons API from Election.org Public Data API — 1 operation(s) for school finance
+    comparisons.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - School Finance Comparisons
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-school-finance-comparisons-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-state-finance-api
+  name: Election.org Public Data API State Finance API
+  description: >-
+    The State Finance API from Election.org Public Data API — 1 operation(s) for state finance.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - State Finance
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-state-finance-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-stock-trades-api
+  name: Election.org Public Data API Stock Trades API
+  description: >-
+    The Stock Trades API from Election.org Public Data API — 1 operation(s) for stock trades.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Stock Trades
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-stock-trades-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/election-org-citation-schema.json
+  - type: JSONSchema
+    url: json-schema/election-org-public-data-response-schema.json
+- aid: election-org:election-org-vendors-api
+  name: Election.org Public Data API Vendors API
+  description: The Vendors API from Election.org Public Data API — 1 operation(s) for vendors.
+  humanURL: https://election.org/data/api
+  baseURL: https://election.org/api/v1
+  tags:
+  - Vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/election-org-vendors-api-openapi.yml
   - type: JSONSchema
     url: json-schema/election-org-citation-schema.json
   - type: JSONSchema

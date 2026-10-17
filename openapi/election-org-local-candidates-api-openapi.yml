@@ -1,0 +1,153 @@
+openapi: 3.2.0
+info:
+  title: Election.org Public Data Local Candidates API
+  version: '2026-09-12'
+  description: Source-first public election data. Public beta coverage is explicit; null and omitted values are never silently converted to zeroes or inferred facts.
+  contact:
+    email: data@election.org
+servers:
+- url: https://election.org/api/v1
+tags:
+- name: Local Candidates
+paths:
+  /local-candidates:
+    get:
+      summary: Search source-backed Los Angeles or San Diego 2026 general-election candidates
+      description: Los Angeles is the default locality. San Diego nominees come from the official Notice of Nominees and separate City Clerk candidate log. Candidate-submitted materials remain distinct from certified identity and contest fields. Unsupported localities return an error, not candidates from another city.
+      parameters:
+      - name: locality
+        in: query
+        description: Trimmed, case-insensitive city slug; omitted or empty selects Los Angeles.
+        schema:
+          type: string
+          enum:
+          - los-angeles
+          - san-diego
+          default: los-angeles
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: q
+        in: query
+        schema:
+          type: string
+          maxLength: 100
+      - name: contest
+        in: query
+        description: Contest slug or ID, such as mayor or la-2026-general-mayor.
+        schema:
+          type: string
+      - name: office
+        in: query
+        description: Permanent local office slug, such as city-attorney.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+      responses:
+        '200':
+          description: Certified candidates, candidate-provided contact fields, permanent page links, source boundaries, and local coverage limits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDataResponse'
+        '422':
+          description: Unsupported locality; error.code=unsupported_locality with supported_localities. No substituted city records.
+      tags:
+      - Local Candidates
+      operationId: getLocalCandidates
+      x-operation-id-source: derived
+components:
+  schemas:
+    Citation:
+      type: object
+      description: Suggested attribution, not a forced backlink or new license. Collection sources are not necessarily evidence for every returned record. Dates are not request generation times.
+      required:
+      - suggested_credit
+      - record_url
+      - record_urls
+      - credit_url
+      - original_sources
+      - updated_at
+      - verified_at
+      - guidance_url
+      - rights_note
+      properties:
+        suggested_credit:
+          type: string
+        record_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        record_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        credit_url:
+          type: string
+          format: uri
+        original_sources:
+          type: array
+          description: 'Returned-data source references. References explicitly marked applies_to_returned_records: false remain in response sources but are excluded here.'
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
+              updated_at:
+                type:
+                - string
+                - 'null'
+              verified_at:
+                type:
+                - string
+                - 'null'
+              record_date:
+                type:
+                - string
+                - 'null'
+                description: Date on the cited record, not a source check or dataset update
+        updated_at:
+          type:
+          - string
+          - 'null'
+          description: Explicit dataset update date, or null when unspecified
+        verified_at:
+          type:
+          - string
+          - 'null'
+          description: Latest stated source check; does not establish freshness of every record
+        dates_note:
+          type: string
+        source_scope:
+          type: string
+        source_summary_truncated:
+          type: boolean
+        guidance_url:
+          type: string
+          format: uri
+        rights_note:
+          type: string
+    PublicDataResponse:
+      type: object
+      required:
+      - data
+      - citation
+      properties:
+        data: {}
+        citation:
+          $ref: '#/components/schemas/Citation'
+      additionalProperties: true
+externalDocs:
+  description: Citation and reuse guidance
+  url: https://election.org/data/api#attribution

@@ -1,0 +1,148 @@
+openapi: 3.2.0
+info:
+  title: Election.org Public Data Local Position History API
+  version: '2026-09-12'
+  description: Source-first public election data. Public beta coverage is explicit; null and omitted values are never silently converted to zeroes or inferred facts.
+  contact:
+    email: data@election.org
+servers:
+- url: https://election.org/api/v1
+tags:
+- name: Local Position History
+paths:
+  /local-position-history:
+    get:
+      summary: Audit archived and live observations of Los Angeles 2026 campaign statements
+      description: An Internet Archive capture proves only that the exact current excerpt appeared by the capture time. Capture time is not publication time, and the API never generates a flip-flop, reversal, consistency, or motive claim.
+      parameters:
+      - name: candidate
+        in: query
+        description: Candidate ID, slug, or name fragment.
+        schema:
+          type: string
+      - name: contest
+        in: query
+        description: Contest ID or slug, such as mayor.
+        schema:
+          type: string
+      - name: topic
+        in: query
+        description: Canonical topic ID or label fragment.
+        schema:
+          type: string
+      - name: archived
+        in: query
+        description: Filter for records with a matching archived observation.
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - 'true'
+          - 'false'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+      responses:
+        '200':
+          description: Campaign position histories, exact archived and live observations, source-page capture coverage, fingerprints, explicit snapshot errors, and interpretation limits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDataResponse'
+      tags:
+      - Local Position History
+      operationId: getLocalPositionHistory
+      x-operation-id-source: derived
+components:
+  schemas:
+    Citation:
+      type: object
+      description: Suggested attribution, not a forced backlink or new license. Collection sources are not necessarily evidence for every returned record. Dates are not request generation times.
+      required:
+      - suggested_credit
+      - record_url
+      - record_urls
+      - credit_url
+      - original_sources
+      - updated_at
+      - verified_at
+      - guidance_url
+      - rights_note
+      properties:
+        suggested_credit:
+          type: string
+        record_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        record_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        credit_url:
+          type: string
+          format: uri
+        original_sources:
+          type: array
+          description: 'Returned-data source references. References explicitly marked applies_to_returned_records: false remain in response sources but are excluded here.'
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
+              updated_at:
+                type:
+                - string
+                - 'null'
+              verified_at:
+                type:
+                - string
+                - 'null'
+              record_date:
+                type:
+                - string
+                - 'null'
+                description: Date on the cited record, not a source check or dataset update
+        updated_at:
+          type:
+          - string
+          - 'null'
+          description: Explicit dataset update date, or null when unspecified
+        verified_at:
+          type:
+          - string
+          - 'null'
+          description: Latest stated source check; does not establish freshness of every record
+        dates_note:
+          type: string
+        source_scope:
+          type: string
+        source_summary_truncated:
+          type: boolean
+        guidance_url:
+          type: string
+          format: uri
+        rights_note:
+          type: string
+    PublicDataResponse:
+      type: object
+      required:
+      - data
+      - citation
+      properties:
+        data: {}
+        citation:
+          $ref: '#/components/schemas/Citation'
+      additionalProperties: true
+externalDocs:
+  description: Citation and reuse guidance
+  url: https://election.org/data/api#attribution

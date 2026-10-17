@@ -1,0 +1,138 @@
+openapi: 3.2.0
+info:
+  title: Election.org Public Data Local Candidate Positions API
+  version: '2026-09-12'
+  description: Source-first public election data. Public beta coverage is explicit; null and omitted values are never silently converted to zeroes or inferred facts.
+  contact:
+    email: data@election.org
+servers:
+- url: https://election.org/api/v1
+tags:
+- name: Local Candidate Positions
+paths:
+  /local-candidate-positions:
+    get:
+      summary: Search exact campaign-published statements for Los Angeles 2026 candidates
+      description: Every record preserves the campaign as speaker and an exact heading of 25 words or fewer. Topic normalization enables equal-field comparison but never implies ideology, agreement, priority, truth, or ballot status.
+      parameters:
+      - name: candidate
+        in: query
+        description: Candidate ID, slug, or name fragment.
+        schema:
+          type: string
+      - name: contest
+        in: query
+        description: Contest ID or slug, such as mayor.
+        schema:
+          type: string
+      - name: topic
+        in: query
+        description: Canonical topic ID or label fragment.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+      responses:
+        '200':
+          description: Attributed campaign statements, source hashes, retrieval dates, topic vocabulary, contest matrices, and explicit coverage limits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDataResponse'
+      tags:
+      - Local Candidate Positions
+      operationId: getLocalCandidatePositions
+      x-operation-id-source: derived
+components:
+  schemas:
+    Citation:
+      type: object
+      description: Suggested attribution, not a forced backlink or new license. Collection sources are not necessarily evidence for every returned record. Dates are not request generation times.
+      required:
+      - suggested_credit
+      - record_url
+      - record_urls
+      - credit_url
+      - original_sources
+      - updated_at
+      - verified_at
+      - guidance_url
+      - rights_note
+      properties:
+        suggested_credit:
+          type: string
+        record_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        record_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        credit_url:
+          type: string
+          format: uri
+        original_sources:
+          type: array
+          description: 'Returned-data source references. References explicitly marked applies_to_returned_records: false remain in response sources but are excluded here.'
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
+              updated_at:
+                type:
+                - string
+                - 'null'
+              verified_at:
+                type:
+                - string
+                - 'null'
+              record_date:
+                type:
+                - string
+                - 'null'
+                description: Date on the cited record, not a source check or dataset update
+        updated_at:
+          type:
+          - string
+          - 'null'
+          description: Explicit dataset update date, or null when unspecified
+        verified_at:
+          type:
+          - string
+          - 'null'
+          description: Latest stated source check; does not establish freshness of every record
+        dates_note:
+          type: string
+        source_scope:
+          type: string
+        source_summary_truncated:
+          type: boolean
+        guidance_url:
+          type: string
+          format: uri
+        rights_note:
+          type: string
+    PublicDataResponse:
+      type: object
+      required:
+      - data
+      - citation
+      properties:
+        data: {}
+        citation:
+          $ref: '#/components/schemas/Citation'
+      additionalProperties: true
+externalDocs:
+  description: Citation and reuse guidance
+  url: https://election.org/data/api#attribution

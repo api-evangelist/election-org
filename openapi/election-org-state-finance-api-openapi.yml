@@ -1,0 +1,188 @@
+openapi: 3.2.0
+info:
+  title: Election.org Public Data State Finance API
+  version: '2026-09-12'
+  description: Source-first public election data. Public beta coverage is explicit; null and omitted values are never silently converted to zeroes or inferred facts.
+  contact:
+    email: data@election.org
+servers:
+- url: https://election.org/api/v1
+tags:
+- name: State Finance
+paths:
+  /state-finance:
+    get:
+      summary: Return official state campaign-finance agencies plus twelve live state…
+      parameters:
+      - name: state
+        in: query
+        required: false
+        description: Two-letter postal abbreviation.
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 2
+      - name: committee_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Exact source filer identity; supported for all twelve connected state adapters. Florida IDs are deterministic hashes of exact source display labels, not source-issued entity identifiers.
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Recipient or spender filing-identity search; supported for all twelve connected state adapters.
+      - name: payee_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Exact aggregate non-individual payee ID; supported for state=CA, state=NY, state=MA, and source-classified Virginia Schedule D payees. Pennsylvania, Florida, Connecticut, Illinois, Minnesota, and North Carolina publish no payee or vendor identities because their exports do not classify people versus organizations.
+      - name: payee_q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Named non-individual payee search; supported for state=CA, state=NY, state=MA, and state=VA within each adapter's source-classification boundary.
+      - name: contributor_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Exact aggregate non-individual contributor ID; supported for state=NY, state=WA, state=CO, state=MA, source-classified Connecticut receipt types, Minnesota political-entity contributor types, and source-classified Virginia Schedule A/B contributors. Pennsylvania, Florida, Illinois, and North Carolina publish no contributor identities because their exports do not classify people versus organizations.
+      - name: contributor_q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Named non-individual contributor search; supported for state=NY, state=WA, state=CO, state=MA, state=CT, state=MN, and state=VA within each adapter's source-classification boundary.
+      - name: independent_spender_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Minnesota CFB independent-expenditure spender registration ID.
+      - name: affected_committee_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Minnesota CFB affected committee registration ID.
+      - name: position
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - for
+          - against
+        description: Minnesota CFB reported independent-expenditure position.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+      responses:
+        '200':
+          description: FEC directory-derived agency registry plus twelve official state adapters, including separately reported Minnesota contribution, general-spending, and independent-expenditure aggregates, latest-amendment Virginia schedules, and source-count-reconciled North Carolina exports, with explicit amendment, privacy, and remaining-gap boundaries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDataResponse'
+      tags:
+      - State Finance
+      operationId: getStateFinance
+      x-operation-id-source: derived
+components:
+  schemas:
+    Citation:
+      type: object
+      description: Suggested attribution, not a forced backlink or new license. Collection sources are not necessarily evidence for every returned record. Dates are not request generation times.
+      required:
+      - suggested_credit
+      - record_url
+      - record_urls
+      - credit_url
+      - original_sources
+      - updated_at
+      - verified_at
+      - guidance_url
+      - rights_note
+      properties:
+        suggested_credit:
+          type: string
+        record_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        record_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        credit_url:
+          type: string
+          format: uri
+        original_sources:
+          type: array
+          description: 'Returned-data source references. References explicitly marked applies_to_returned_records: false remain in response sources but are excluded here.'
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
+              updated_at:
+                type:
+                - string
+                - 'null'
+              verified_at:
+                type:
+                - string
+                - 'null'
+              record_date:
+                type:
+                - string
+                - 'null'
+                description: Date on the cited record, not a source check or dataset update
+        updated_at:
+          type:
+          - string
+          - 'null'
+          description: Explicit dataset update date, or null when unspecified
+        verified_at:
+          type:
+          - string
+          - 'null'
+          description: Latest stated source check; does not establish freshness of every record
+        dates_note:
+          type: string
+        source_scope:
+          type: string
+        source_summary_truncated:
+          type: boolean
+        guidance_url:
+          type: string
+          format: uri
+        rights_note:
+          type: string
+    PublicDataResponse:
+      type: object
+      required:
+      - data
+      - citation
+      properties:
+        data: {}
+        citation:
+          $ref: '#/components/schemas/Citation'
+      additionalProperties: true
+externalDocs:
+  description: Citation and reuse guidance
+  url: https://election.org/data/api#attribution

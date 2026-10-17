@@ -1,0 +1,236 @@
+openapi: 3.2.0
+info:
+  title: Election.org Public Data International Results API
+  version: '2026-09-12'
+  description: Source-first public election data. Public beta coverage is explicit; null and omitted values are never silently converted to zeroes or inferred facts.
+  contact:
+    email: data@election.org
+servers:
+- url: https://election.org/api/v1
+tags:
+- name: International Results
+paths:
+  /international-results:
+    get:
+      summary: Search authoritative international election results
+      description: Search authoritative national election results including Ethiopia's official source-bounded 2021 general-election layer, Uganda's official final 2021 presidential result, and Egypt's official final 2024 presidential result. Ethiopia exposes the September House and regional-council aggregates for Harari, SNNP, and Somali without treating that three-region table as a complete national result or inventing candidate votes or current tenure. Source-specific vote, seat, candidate, personal-vote, elected-result, alternate, aggregate-only, document-coverage, and disputed-territorial-scope layers stay separate.
+      parameters:
+      - name: country
+        in: query
+        description: Current coverage includes Ethiopia ET/ETH, Uganda UG/UGA, and Egypt EG/EGY alongside the other published country adapters. Amharic ኢትዮጵያ and Arabic مصر are also accepted by the runtime endpoint.
+        schema:
+          type: string
+          default: IN
+      - name: year
+        in: query
+        schema:
+          type: integer
+          enum:
+          - 2021
+          - 2022
+          - 2023
+          - 2024
+          - 2025
+          - 2026
+          default: 2024
+      - name: round
+        in: query
+        description: Brazil 2022 presidential round (defaults to 2), or the round in which a French constituency seat was decided.
+        schema:
+          type: integer
+          enum:
+          - 1
+          - 2
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: India State/Union Territory, UK region/nation, Canadian province/territory, Australian state/territory, German Land, French department, South African province, Mexican state, Brazilian federative unit/overseas result group, Japanese prefecture, Argentina electoral district, Republic of Korea region, Indonesian province/overseas result district, Türkiye province, Nigeria state/FCT result-document coverage record, Pakistan province/area aggregate, Poland voivodeship, Sweden Riksdag constituency, or Russia CEC commission row; accepts names, native names where available, codes where available, or Election.org slugs.
+        schema:
+          type: string
+      - name: region
+        in: query
+        description: UK Parliament region or nation name, Republic of Korea regional total, Indonesian geographic result, Türkiye province, or Election.org slug.
+        schema:
+          type: string
+      - name: province
+        in: query
+        description: Canadian province or territory, South African province, or Spanish Congress constituency name or Election.org slug.
+        schema:
+          type: string
+      - name: prefecture
+        in: query
+        description: Japanese prefecture name, native name, two-digit code, ISO 3166-2 code, or Election.org slug.
+        schema:
+          type: string
+      - name: department
+        in: query
+        description: French department name, official code, or Election.org slug.
+        schema:
+          type: string
+      - name: constituency
+        in: query
+        schema:
+          type: string
+      - name: commission
+        in: query
+        description: Russia CEC commission name or Election.org slug, such as Москва. Use the separate id parameter for a permanent record ID.
+        schema:
+          type: string
+      - name: district
+        in: query
+        description: Italian 2022 Chamber single-member district label, Argentine 2023 runoff electoral-district ID, or Netherlands 2025 electoral-district ID, name, or Election.org slug.
+        schema:
+          type: string
+      - name: record_type
+        in: query
+        description: For Italy, return district or raw list-mark records. For Spain, return province, party, or historical elected-member records. For the Netherlands, return district, party, or historical elected-member records. For the Republic of Korea, return region or historical candidate-result records. For Indonesia, return region or historical candidate-ticket result records. For Türkiye, return province, final component, or historical candidate-result records. For Nigeria, return the national declaration, historical candidate-result records, or state/FCT result-document coverage records. For the Philippines, return national, Senate candidate, or party-list records. For New Zealand, return national, party, electorate, or historical candidate-result records. For Poland, return region or historical candidate-result records. For Sweden, return national, constituency, named party, or historical candidate personal-vote records. For Russia, return national, CEC commission-row, or historical candidate-result records.
+        schema:
+          type: string
+          enum:
+          - national
+          - state
+          - district
+          - list
+          - province
+          - constituency
+          - party
+          - party_list
+          - member
+          - region
+          - candidate
+          - senate_candidate
+          - commission
+      - name: candidate
+        in: query
+        schema:
+          type: string
+      - name: party
+        in: query
+        description: Germany first-vote or second-vote party/choice label, French official candidate nuance code, South African party name or abbreviation, Japanese filing-party category, Italian published list label, Argentine runoff political grouping, Spanish seated-party family, Netherlands party name or official ID, or Republic of Korea candidate party. Italy returns raw direct list marks, not a final legally apportioned party total.
+        schema:
+          type: string
+      - name: represented
+        in: query
+        description: For South Africa or Japan, filter to parties/categories with seats (true) or without seats (false).
+        schema:
+          type: boolean
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 350
+          default: 100
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      responses:
+        '200':
+          description: Historical constituency results, candidacy records where safely available, source fingerprints, and explicit coverage limits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDataResponse'
+        '404':
+          description: Requested permanent result ID was not found
+        '422':
+          description: Country or year is not yet supported
+      tags:
+      - International Results
+      operationId: getInternationalResults
+      x-operation-id-source: derived
+components:
+  schemas:
+    Citation:
+      type: object
+      description: Suggested attribution, not a forced backlink or new license. Collection sources are not necessarily evidence for every returned record. Dates are not request generation times.
+      required:
+      - suggested_credit
+      - record_url
+      - record_urls
+      - credit_url
+      - original_sources
+      - updated_at
+      - verified_at
+      - guidance_url
+      - rights_note
+      properties:
+        suggested_credit:
+          type: string
+        record_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        record_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        credit_url:
+          type: string
+          format: uri
+        original_sources:
+          type: array
+          description: 'Returned-data source references. References explicitly marked applies_to_returned_records: false remain in response sources but are excluded here.'
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
+              updated_at:
+                type:
+                - string
+                - 'null'
+              verified_at:
+                type:
+                - string
+                - 'null'
+              record_date:
+                type:
+                - string
+                - 'null'
+                description: Date on the cited record, not a source check or dataset update
+        updated_at:
+          type:
+          - string
+          - 'null'
+          description: Explicit dataset update date, or null when unspecified
+        verified_at:
+          type:
+          - string
+          - 'null'
+          description: Latest stated source check; does not establish freshness of every record
+        dates_note:
+          type: string
+        source_scope:
+          type: string
+        source_summary_truncated:
+          type: boolean
+        guidance_url:
+          type: string
+          format: uri
+        rights_note:
+          type: string
+    PublicDataResponse:
+      type: object
+      required:
+      - data
+      - citation
+      properties:
+        data: {}
+        citation:
+          $ref: '#/components/schemas/Citation'
+      additionalProperties: true
+externalDocs:
+  description: Citation and reuse guidance
+  url: https://election.org/data/api#attribution

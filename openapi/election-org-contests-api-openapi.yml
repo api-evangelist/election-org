@@ -1,0 +1,161 @@
+openapi: 3.2.0
+info:
+  title: Election.org Public Data Contests API
+  version: '2026-09-12'
+  description: Source-first public election data. Public beta coverage is explicit; null and omitted values are never silently converted to zeroes or inferred facts.
+  contact:
+    email: data@election.org
+servers:
+- url: https://election.org/api/v1
+tags:
+- name: Contests
+paths:
+  /contests:
+    get:
+      summary: Search permanent 2026 federal contest records
+      description: Groups identity-complete FEC filing records by office, state, and district. Inclusion never proves ballot qualification.
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Contest title, ID, or candidate name.
+        schema:
+          type: string
+          maxLength: 100
+      - name: state
+        in: query
+        required: false
+        description: Two-letter postal abbreviation.
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 2
+      - name: office
+        in: query
+        schema:
+          type: string
+          enum:
+          - H
+          - S
+      - name: district
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Current contest entities, candidate filing records, FEC election dates, and coverage limits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDataResponse'
+        '404':
+          description: Requested contest ID not found
+        '422':
+          description: Invalid office filter
+      tags:
+      - Contests
+      operationId: getContests
+      x-operation-id-source: derived
+components:
+  schemas:
+    Citation:
+      type: object
+      description: Suggested attribution, not a forced backlink or new license. Collection sources are not necessarily evidence for every returned record. Dates are not request generation times.
+      required:
+      - suggested_credit
+      - record_url
+      - record_urls
+      - credit_url
+      - original_sources
+      - updated_at
+      - verified_at
+      - guidance_url
+      - rights_note
+      properties:
+        suggested_credit:
+          type: string
+        record_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        record_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        credit_url:
+          type: string
+          format: uri
+        original_sources:
+          type: array
+          description: 'Returned-data source references. References explicitly marked applies_to_returned_records: false remain in response sources but are excluded here.'
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
+              updated_at:
+                type:
+                - string
+                - 'null'
+              verified_at:
+                type:
+                - string
+                - 'null'
+              record_date:
+                type:
+                - string
+                - 'null'
+                description: Date on the cited record, not a source check or dataset update
+        updated_at:
+          type:
+          - string
+          - 'null'
+          description: Explicit dataset update date, or null when unspecified
+        verified_at:
+          type:
+          - string
+          - 'null'
+          description: Latest stated source check; does not establish freshness of every record
+        dates_note:
+          type: string
+        source_scope:
+          type: string
+        source_summary_truncated:
+          type: boolean
+        guidance_url:
+          type: string
+          format: uri
+        rights_note:
+          type: string
+    PublicDataResponse:
+      type: object
+      required:
+      - data
+      - citation
+      properties:
+        data: {}
+        citation:
+          $ref: '#/components/schemas/Citation'
+      additionalProperties: true
+externalDocs:
+  description: Citation and reuse guidance
+  url: https://election.org/data/api#attribution

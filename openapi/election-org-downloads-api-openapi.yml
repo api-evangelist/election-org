@@ -1,0 +1,120 @@
+openapi: 3.2.0
+info:
+  title: Election.org Public Data Downloads API
+  version: '2026-09-12'
+  description: Source-first public election data. Public beta coverage is explicit; null and omitted values are never silently converted to zeroes or inferred facts.
+  contact:
+    email: data@election.org
+servers:
+- url: https://election.org/api/v1
+tags:
+- name: Downloads
+paths:
+  /downloads/federal-contests-2026.csv:
+    get:
+      summary: Download permanent 2026 federal contest filing fields
+      responses:
+        '200':
+          description: Versioned CSV of covered 2026 U.S. House and Senate contests with sourced race identity and election-scope boundaries
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+      tags:
+      - Downloads
+      operationId: getDownloadsFederalContests2026Csv
+      x-operation-id-source: derived
+  /downloads/federal-candidates-2026.csv:
+    get:
+      summary: Download identity-complete 2026 federal candidate filing records
+      responses:
+        '200':
+          description: Versioned CSV of FEC filing records matched to covered 2026 contests; not proof of ballot qualification
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+      tags:
+      - Downloads
+      operationId: getDownloadsFederalCandidates2026Csv
+      x-operation-id-source: derived
+  /downloads/federal-results-2022.csv:
+    get:
+      summary: Download official 2022 federal candidate result records
+      responses:
+        '200':
+          description: Versioned CSV containing 3,098 FEC-published candidate result records
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+      tags:
+      - Downloads
+      operationId: getDownloadsFederalResults2022Csv
+      x-operation-id-source: derived
+  /downloads/federal-results-2024.csv:
+    get:
+      summary: Download official 2024 federal candidate result records
+      responses:
+        '200':
+          description: Versioned CSV containing 1,300 House Clerk-published candidate result records
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+      tags:
+      - Downloads
+      operationId: getDownloadsFederalResults2024Csv
+      x-operation-id-source: derived
+  /downloads/federal-results-2020.csv:
+    get:
+      summary: Download official 2020 federal candidate result records
+      responses:
+        '200':
+          description: Versioned CSV containing 2,994 FEC-published candidate result records
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+      tags:
+      - Downloads
+      operationId: getDownloadsFederalResults2020Csv
+      x-operation-id-source: derived
+  /downloads/federal-results-2018.csv:
+    get:
+      summary: Download official 2018 federal candidate result records
+      responses:
+        '200':
+          description: Versioned CSV containing 3,128 FEC-published candidate result records
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+      tags:
+      - Downloads
+      operationId: getDownloadsFederalResults2018Csv
+      x-operation-id-source: derived
+  /downloads/federal-results-2016.csv:
+    get:
+      summary: Download official 2016 federal candidate result records
+      responses:
+        '200':
+          description: Versioned CSV containing 2,560 FEC-published candidate result records
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+      tags:
+      - Downloads
+      operationId: getDownloadsFederalResults2016Csv
+      x-operation-id-source: derived
+externalDocs:
+  description: Citation and reuse guidance
+  url: https://election.org/data/api#attribution
